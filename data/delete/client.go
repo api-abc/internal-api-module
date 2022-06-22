@@ -1,4 +1,4 @@
-package data
+package delete
 
 import "github.com/api-abc/internal-api-module/rest"
 

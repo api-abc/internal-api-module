@@ -13,3 +13,11 @@ type BodyResponseGet struct {
 	Message string        `json:"message"`
 	Data    []domain.Data `json:"data,omitempty"`
 }
+
+const (
+	StatusOK                  = 1
+	StatusCreated             = 2
+	StatusBadRequest          = 3
+	StatusNotFound            = 4
+	StatusInternalServerError = 5
+)
