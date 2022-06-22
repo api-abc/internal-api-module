@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/api-abc/internal-api-module/data"
+	del "github.com/api-abc/internal-api-module/data/delete"
+	ins "github.com/api-abc/internal-api-module/data/insert"
+	upd "github.com/api-abc/internal-api-module/data/update"
 	"github.com/api-abc/internal-api-module/model/domain"
 	"github.com/api-abc/internal-api-module/model/request"
 	"github.com/api-abc/internal-api-module/rest"
@@ -24,7 +26,7 @@ func main() {
 	}
 
 	cl := rest.New("http://localhost:8080")
-	cl_data := data.New(cl)
+	cl_data := ins.New(cl)
 
 	data_insert, err := cl_data.Insert(context.Background(), req)
 	if err != nil {
@@ -52,7 +54,7 @@ func main() {
 	}
 
 	cl2 := rest.New("http://localhost:8082")
-	cl2_data := data.New(cl2)
+	cl2_data := upd.New(cl2)
 
 	data_update, err2 := cl2_data.Update(context.Background(), req2, "Dipsy")
 	if err2 != nil {
@@ -61,7 +63,7 @@ func main() {
 		fmt.Println(data_update)
 	}
 
-	countData2, err2 := cl_data.GetUpdated(context.Background())
+	countData2, err2 := cl2_data.GetUpdated(context.Background())
 	if err2 != nil {
 		fmt.Println(err2)
 	} else {
@@ -71,7 +73,7 @@ func main() {
 	// =============================================== //
 	// TEST DELETE
 	cl3 := rest.New("http://localhost:8081")
-	cl3_data := data.New(cl3)
+	cl3_data := del.New(cl3)
 
 	data_delete, err3 := cl3_data.Delete(context.Background(), "Dipsy")
 	if err3 != nil {
@@ -80,7 +82,7 @@ func main() {
 		fmt.Println(data_delete)
 	}
 
-	countData3, err3 := cl_data.GetDeleted(context.Background())
+	countData3, err3 := cl3_data.GetDeleted(context.Background())
 	if err3 != nil {
 		fmt.Println(err3)
 	} else {
